@@ -30,6 +30,7 @@ const getBaseWorkspaceStyling = (overrides: Partial<TWorkspaceStyling> = {}): TW
 
     inputBorderColor: null,
     roundness: null, // defaults to 8 in addCustomThemeToDom if null here
+    scrollbarWidth: null,
     hideProgressBar: null,
     allowStyleOverwrite: false,
     highlightBorderColor: null,
@@ -292,6 +293,24 @@ describe("addCustomThemeToDom", () => {
     const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
     const variables = getCssVariables(styleElement);
     expect(variables["--fb-brand-text-color"]).toBe("#ffffff");
+  });
+
+  test("should not emit scrollbar variables for the default thin scrollbar", () => {
+    const styling = getBaseWorkspaceStyling({ brandColor: { light: "#0000FF" }, scrollbarWidth: "thin" });
+    addCustomThemeToDom({ styling });
+    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const variables = getCssVariables(styleElement);
+    expect(variables["--fb-scrollbar-width"]).toBeUndefined();
+    expect(variables["--fb-scrollbar-size"]).toBeUndefined();
+  });
+
+  test("should emit scrollbar variables when scrollbarWidth is auto", () => {
+    const styling = getBaseWorkspaceStyling({ brandColor: { light: "#0000FF" }, scrollbarWidth: "auto" });
+    addCustomThemeToDom({ styling });
+    const styleElement = document.getElementById("formbricks__css__custom") as HTMLStyleElement;
+    const variables = getCssVariables(styleElement);
+    expect(variables["--fb-scrollbar-width"]).toBe("auto");
+    expect(variables["--fb-scrollbar-size"]).toBe("14px");
   });
 
   test("should apply all survey styling properties", () => {

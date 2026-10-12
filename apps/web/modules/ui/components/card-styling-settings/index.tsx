@@ -14,6 +14,7 @@ import { CardArrangementTabs } from "@/modules/ui/components/card-arrangement-ta
 import { CardWidthTabs } from "@/modules/ui/components/card-width-tabs";
 import { ColorPicker } from "@/modules/ui/components/color-picker";
 import { FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/modules/ui/components/form";
+import { OptionsSwitch } from "@/modules/ui/components/options-switch";
 import { useStylingAppearance } from "@/modules/ui/components/styling-appearance";
 import { ColorField, DimensionInput } from "@/modules/ui/components/styling-fields";
 import { Switch } from "@/modules/ui/components/switch";
@@ -165,6 +166,29 @@ export const CardStylingSettings = ({
               )}
             />
           )}
+
+          <FormField
+            control={form.control}
+            name="scrollbarWidth"
+            render={({ field }) => (
+              <FormItem className="col-span-2">
+                <div>
+                  <FormLabel>{t("workspace.surveys.edit.scrollbar_width")}</FormLabel>
+                  <FormDescription>{t("workspace.surveys.edit.scrollbar_width_description")}</FormDescription>
+                </div>
+                <FormControl>
+                  <OptionsSwitch
+                    options={[
+                      { value: "thin", label: t("workspace.surveys.edit.scrollbar_width_thin") },
+                      { value: "auto", label: t("workspace.surveys.edit.scrollbar_width_auto") },
+                    ]}
+                    currentOption={field.value ?? "thin"}
+                    handleOptionChange={(value) => field.onChange(value)}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
         </div>
 
         {/* Highlight Border Section */}

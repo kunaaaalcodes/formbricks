@@ -131,6 +131,7 @@ const ZSurveyBase = z.object({
       highlightBorderColor: ZStylingColor.nullish(),
       isDarkModeEnabled: z.boolean().nullish(),
       roundness: z.number().nullish(),
+      scrollbarWidth: z.enum(["thin", "auto"]).nullish(),
       cardArrangement: ZCardArrangement.nullish(),
       linkSurveyCardWidth: ZLinkSurveyCardWidthOptions.nullish(),
       background: ZSurveyStylingBackground.nullish(),

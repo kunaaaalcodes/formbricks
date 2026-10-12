@@ -34,9 +34,11 @@
   }
 }
 
-/* Chrome, Edge, and Safari */
+/* Chrome, Edge, and Safari. The size follows the scrollbarWidth styling setting; the fallback keeps
+   the compact 6px scrollbars surveys have always rendered. */
 #fbjs *::-webkit-scrollbar {
-  width: 6px;
+  width: var(--fb-scrollbar-size, 6px);
+  height: var(--fb-scrollbar-size, 6px);
   background: transparent;
 }
 
@@ -50,9 +52,9 @@
   border-radius: 10px;
 }
 
-/* Firefox */
+/* Firefox. `auto` restores the OS default width; the fallback keeps the thin scrollbars. */
 #fbjs * {
-  scrollbar-width: thin;
+  scrollbar-width: var(--fb-scrollbar-width, thin);
   scrollbar-color: var(--fb-brand-color) transparent;
 }
 

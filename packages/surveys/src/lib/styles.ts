@@ -302,6 +302,13 @@ export const addCustomThemeToDom = ({
   appendCssVariable("input-border-radius", formatDimension(roundness));
   appendCssVariable("option-border-radius", formatDimension(roundness));
   appendCssVariable("button-border-radius", formatDimension(roundness));
+
+  // Scrollbar width: only the wider "auto" needs variables. Unset (and the legacy default) falls back
+  // to the thin custom scrollbar in global.css, so existing surveys keep their current look.
+  if (styling.scrollbarWidth === "auto") {
+    appendCssVariable("scrollbar-width", "auto");
+    appendCssVariable("scrollbar-size", "14px");
+  }
   appendCssVariable("input-background-color", styling.inputBgColor?.light);
   appendCssVariable("input-bg-color", styling.inputBgColor?.light);
   appendCssVariable("option-bg-color", styling.optionBgColor?.light);

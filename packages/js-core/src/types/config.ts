@@ -257,6 +257,7 @@ export interface TBaseStyling {
   cardBorderColor?: TStylingColor | null;
   highlightBorderColor?: TStylingColor | null;
   roundness?: TDimension;
+  scrollbarWidth?: "thin" | "auto" | null;
   cardArrangement?: {
     // "cardless" is only supported for link surveys.
     linkSurveys: "casual" | "straight" | "simple" | "cardless";

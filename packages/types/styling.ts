@@ -21,6 +21,11 @@ export const ZCardArrangement = z.object({
 export const ZLinkSurveyCardWidthOptions = z.enum(["narrow", "default", "wide"]);
 export type TLinkSurveyCardWidthOptions = z.infer<typeof ZLinkSurveyCardWidthOptions>;
 
+// "thin" keeps the compact custom scrollbar that surveys have always rendered; "auto" restores the
+// browser/OS default width for accessibility and large screens.
+export const ZScrollbarWidthOptions = z.enum(["thin", "auto"]);
+export type TScrollbarWidthOptions = z.infer<typeof ZScrollbarWidthOptions>;
+
 export const LINK_SURVEY_CARD_WIDTH_MAX: Record<TLinkSurveyCardWidthOptions, string> = {
   narrow: "clamp(17.5rem, 88vw, 30rem)",
   default: "clamp(20rem, 92vw, 40rem)",
@@ -120,6 +125,7 @@ export const ZBaseStyling = z.object({
   highlightBorderColor: ZStylingColor.nullish(),
   isDarkModeEnabled: z.boolean().nullish(),
   roundness: z.union([z.number(), z.string()]).nullish(),
+  scrollbarWidth: ZScrollbarWidthOptions.nullish(),
   cardArrangement: ZCardArrangement.nullish(),
   linkSurveyCardWidth: ZLinkSurveyCardWidthOptions.nullish(),
   background: ZSurveyStylingBackground.nullish(),
